@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -40,12 +41,19 @@ func index(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, "Hello World!")
 }
 
+func staticResources(resources []string, mux *http.ServeMux) {
+	for _, res := range resources {
+		path := fmt.Sprintf("/%s/", res)
+		mux.Handle(path, http.StripPrefix(path, http.FileServer(http.Dir(res))))
+	}
+}
+
 func main() {
 	mux := http.NewServeMux()
-	mux.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
-	mux.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))
-	mux.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("js"))))
-	mux.Handle("/fonts/", http.StripPrefix("/fonts/", http.FileServer(http.Dir("fonts"))))
+
+	resources := []string{"css", "img", "js", "fonts"}
+	staticResources(resources, mux)
+
 	mux.HandleFunc("/", index)
 	mux.HandleFunc("/api/products", products)
 
@@ -54,5 +62,6 @@ func main() {
 		Handler: mux,
 	}
 
+	log.Println("Starting server..")
 	log.Fatal(server.ListenAndServe(), nil)
 }
