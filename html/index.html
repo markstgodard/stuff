@@ -139,9 +139,10 @@
                   withCredentials: true
             },
             error: function(jqXHR, exception) {
-              console.log(jqXHR);
-              console.log(exception);
-              $.notifyBar({ cssClass: "error", html: "Sorry an error occurred ¯\\_(ツ)_/¯ " });
+               $('#loading').hide();
+               var item = $('<div class="ratings">Products service unavailable</div>')
+               item.appendTo( "#products" );
+               $.notifyBar({ cssClass: "error", html: "Sorry having a problem loading products right now ¯\\_(ツ)_/¯ " });
             }
         });
 
