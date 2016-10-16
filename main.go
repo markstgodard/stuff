@@ -44,7 +44,8 @@ func index(w http.ResponseWriter, r *http.Request) {
 func staticResources(resources []string, mux *http.ServeMux) {
 	for _, res := range resources {
 		path := fmt.Sprintf("/%s/", res)
-		mux.Handle(path, http.StripPrefix(path, http.FileServer(http.Dir(res))))
+		dir := fmt.Sprintf("static/%s", res)
+		mux.Handle(path, http.StripPrefix(path, http.FileServer(http.Dir(dir))))
 	}
 }
 
