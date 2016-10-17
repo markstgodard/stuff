@@ -2,3 +2,6 @@ stuff
 *.tmp
 *.swp
 *.log
+tmp
+vendor
+bin

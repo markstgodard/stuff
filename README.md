@@ -45,8 +45,8 @@ Getting apps in org demo / space demo as admin...
 OK
 
 name               requested state   instances   memory   disk   urls
-books-controller   started           1/1         256M     1G     books-controller.bosh-lite.com
-books-registry     started           1/1         256M     1G     books-registry.bosh-lite.com
+stuff-controller   started           1/1         256M     1G     stuff-controller.bosh-lite.com
+stuff-registry     started           1/1         256M     1G     stuff-registry.bosh-lite.com
 ```
 
 ### Deploy app
