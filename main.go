@@ -51,9 +51,9 @@ func staticResources(resources []string, mux *http.ServeMux) {
 var productsAPI string
 
 func main() {
-	proxyAddr := os.Getenv("PROXY_ADDR")
-	productsAPI = fmt.Sprintf("%s/%s/api/products", proxyAddr, "products")
-	log.Printf("using products api: %s\n", productsAPI)
+	productsAddr := os.Getenv("PRODUCTS_PROXY_ADDR")
+	productsAPI = fmt.Sprintf("%s/api/products", productsAddr)
+	log.Printf("products api: %s\n", productsAPI)
 
 	mux := http.NewServeMux()
 
