@@ -198,7 +198,7 @@
 
         var stars = $('<p>');
         for(var i=0; i < 5; i++){
-          var starred = (i+1) > item.stars ? "glyphicon glyphicon-star-empty" : "glyphicon glyphicon-star";
+          var starred = (i+1) > item.review.stars ? "glyphicon glyphicon-star-empty" : "glyphicon glyphicon-star";
           $( "<span>" ).attr( "class", starred ).appendTo(stars);
         }
 
