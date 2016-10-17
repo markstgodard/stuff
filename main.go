@@ -27,6 +27,7 @@ func products(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Printf("Error fetching products: %s\n", err.Error())
 		w.WriteHeader(http.StatusServiceUnavailable)
+		return
 	}
 	defer res.Body.Close()
 
