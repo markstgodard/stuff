@@ -149,33 +149,13 @@
         $('#loading').show();
 
         $.getJSON("products", function(data){
-
              $('#loading').hide();
              $.each( data, function( i, item ) {
-                console.log(item);
                 addProduct(item);
              });
-
         });
     });
 
-    function setProducts(data) {
-          $.ajax({
-              url: '/api/products',
-              error: function(jqXHR, exception) {
-                $('#loading').hide();
-                $.notifyBar({ cssClass: "error", html: "Sorry, having a problem loading products right now" });
-                var item = $('<div class="ratings">No products to display</div>')
-                item.appendTo( "#products" );
-              }
-          }).then(function(data, status, jqxhr) {
-
-             $('#loading').hide();
-             $.each( data.products, function( i, item ) {
-                addProduct(item);
-            });
-          })
-    };
 
     function setCart(data) {
           $.ajax({
