@@ -50,7 +50,7 @@ stuff-registry     started           1/1         256M     1G     stuff-registry.
 
 ### Deploy Store app
 
-You may either run this script:
+Run this script:
 ```sh
 ./scripts/deploy.sh
 ```
