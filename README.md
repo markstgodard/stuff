@@ -49,12 +49,51 @@ stuff-controller   started           1/1         256M     1G     stuff-controlle
 stuff-registry     started           1/1         256M     1G     stuff-registry.bosh-lite.com
 ```
 
-### Deploy app
+### Deploy Store app
 
 You may either run this script:
 ```sh
 ./scripts/deploy.sh
 ```
 
+To deploy the [Products](https://github.com/markstgodard/stuff-products) and [Reviews](https://github.com/markstgodard/stuff-reviews) app, please checkout those projects and run the same `./scripts/deploy.sh` script.
+
+
+### Check Apps
+After deploying you should see the controller, registry and store apps with routes. The products and review apps will not have external routes.
+```sh
+$ cf apps
+Getting apps in org demo / space demo as mark...
+OK
+
+name               requested state   instances   memory   disk   urls
+stuff-controller   started           1/1         256M     1G     stuff-controller.bosh-lite.com
+stuff-registry     started           1/1         256M     1G     stuff-registry.bosh-lite.com
+stuff              started           1/1         256M     1G     stuff.bosh-lite.com
+stuff-products     started           1/1         256M     1G
+stuff-reviews      started           1/1         256M     1G
+```
+
+### Check Network Policy
+The above scripts/commands will create the appropriate network policy to ensure that only appropriate apps can talk to each other.
+```sh
+$ cf access-list
+Listing policies as admin...
+OK
+
+Source          Destination     Protocol        Port
+stuff           stuff-products  tcp             8080
+stuff-products  stuff-reviews   tcp             8080
+```
+
+### Try it
+Go to store app, for example: [http://stuff.bosh-lite.com](http://stuff.bosh-lite.com)
+
+## Now what?
+For more information on CF Container Networking:
+- [CF Container Networking release](https://gitcom.com/cloudfoundry-incubator/netman-release)
+- Chat with us at the `#container-networking` channel on [CloudFoundry Slack](http://slack.cloudfoundry.org/)
+
+
 ## Disclaimer
-Don't try and actually buy stuff.
+`Don't try and actually buy stuff.`
