@@ -2,7 +2,7 @@
 source $(pwd)/scripts/cf.cfg
 
 cf push ${APP_NAME} -o markstgodard/stuff-store:v1 --no-start --no-manifest
-cf set-env ${APP_NAME} PROXY_ADDR "http://localhost:6397"
+cf set-env ${APP_NAME} PROXY_ADDR "http://localhost:6379"
 cf set-env ${APP_NAME} A8_SERVICE "store:v0"
 cf set-env ${APP_NAME} A8_ENDPOINT_PORT "8080"
 cf set-env ${APP_NAME} A8_ENDPOINT_TYPE "http"
