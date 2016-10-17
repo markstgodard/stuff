@@ -1,4 +1,4 @@
-# Stuff
+# Stuff :movie_camera:
 Stuff is a **fake store** is a microservices-based demo application that illustrates the use of [CF Container Networking](https://github.com/cloudfoundry-incubator/netman-release).
 
 The app uses [Amalgam8](http://amalagam8.io) for [sidecar](https://www.amalgam8.io/docs/sidecar) and Service Discovery / Routing [control plane](https://www.amalgam8.io/docs/control-plane).
