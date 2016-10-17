@@ -52,8 +52,8 @@ var productsAPI string
 
 func main() {
 	proxyAddr := os.Getenv("PROXY_ADDR")
-	productsAPI = fmt.Sprintf("/%s/api/products", proxyAddr, "products")
-	log.Printf("products api: %s\n", productsAPI)
+	productsAPI = fmt.Sprintf("%s/%s/api/products", proxyAddr, "products")
+	log.Printf("using products api: %s\n", productsAPI)
 
 	mux := http.NewServeMux()
 

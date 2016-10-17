@@ -1,7 +1,7 @@
 #!/bin/bash
 source $(pwd)/scripts/cf.cfg
 
-cf push ${APP_NAME} -o markstgodard/stuff:v0 --no-start --no-manifest
+cf push ${APP_NAME} -o markstgodard/stuff:v1 --no-start --no-manifest
 cf set-env ${APP_NAME} PROXY_ADDR "http://localhost:6397"
 cf set-env ${APP_NAME} A8_SERVICE "store:v0"
 cf set-env ${APP_NAME} A8_ENDPOINT_PORT "8080"
