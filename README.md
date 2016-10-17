@@ -56,5 +56,5 @@ You may either run this script:
 ./scripts/deploy.sh
 ```
 
-# Disclaimer
+## Disclaimer
 Don't try and actually buy stuff.
