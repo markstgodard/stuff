@@ -1,11 +1,60 @@
 # Stuff
 ## About
-Stuff is a **fake store** illustrating the use of [micro services](http://martinfowler.com/articles/microservices.html)
+Stuff is a **fake store** is a microservices-based demo application that illustrates the use of [CF Container Networking](https://github.com/cloudfoundry-incubator/netman-release).
 
-![alt text](https://raw.githubusercontent.com/markstgodard/stuff/master/shop.png "Shop Stuff")
+The app uses [Amalgam8](http://amalagam8.io) for [sidecar](https://www.amalgam8.io/docs/sidecar) and Service Discovery / Routing [control plane](https://www.amalgam8.io/docs/control-plane).
 
-This project is the store front uses the following microservices:
+This project is the store front app that uses the following microservices:
 - [Products](http://github.com/markstgodard/stuff-products)
 - [Reviews](http://github.com/markstgodard/stuff-reviews)
 
+![alt text](https://raw.githubusercontent.com/markstgodard/stuff/master/shop.png "Shop Stuff")
+
+About this demo app:
+- has a single external route for store front app
+- all other microservices communication and policy enforcement will be on the internal overlay [CF Container Network](https://github.com/cloudfoundry-incubator/netman-release)
+- CF apps are deployed as [Docker](https://docker.com) containers and leverage a [sidecar](https://www.amalgam8.io/docs/sidecar) inside the container that handles service discovery, health checks and routing requests to other microservices
+- amalgam8 control plane (service registry / controller) is not deployed with auth enabled, please see [a8 docs](https://www.amalgam8.io/docs/sidecar/sidecar-configuration-options) for more info.
+
+
+## Prerequisites
+- [CF](https://github.com/cloudfoundry/cf-release) deployment
+- [Diego](https://github.com/cloudfoundry/diego-release) deployment
+  - [Docker support](https://github.com/cloudfoundry/diego-design-notes/blob/master/docker-support.md) enabled
+  - [Netman support](https://github.com/cloudfoundry-incubator/netman-release) enabled
+- [cf cli](http://docs.cloudfoundry.org/cf-cli)
+  - [netman network policy ](https://github.com/cloudfoundry-incubator/netman-release/releases) cf cli plugin installed
+- [jq](https://stedolan.github.io/jq/)
+
+## Configuration
+The scripts in this example uses this [config file](./scripts/cf.cfg) to configure CF domains, app names, etc.
+If you wish to use the scripts to deploy the demo apps, please change the values to match your target environment.
+The defaults assume [bosh-lite](https://github.com/cloudfoundry/bosh-lite) and that you already are targeting a org and space.
+
+## Deployment
+
+### Deploy Amalgam8 Controller and Registry
+```sh
+./scripts/deploy-a8.sh
+```
+
+You should now see the amalgam8 controller and registry apps running:
+```sh
+$ cf apps
+Getting apps in org demo / space demo as admin...
+OK
+
+name               requested state   instances   memory   disk   urls
+books-controller   started           1/1         256M     1G     books-controller.bosh-lite.com
+books-registry     started           1/1         256M     1G     books-registry.bosh-lite.com
+```
+
+### Deploy app
+
+You may either run this script:
+```sh
+./scripts/deploy.sh
+```
+
+# Disclaimer
 Don't try and actually buy stuff.
