@@ -3,7 +3,7 @@ source $(pwd)/scripts/cf.cfg
 
 cf push ${STORE_NAME} -o markstgodard/stuff:v0 --no-start --no-manifest
 cf set-env ${STORE_NAME} A8_SERVICE "stuff:v0"
-cf set-env ${STORE_NAME} A8_ENDPOINT_PORT "${port}"
+cf set-env ${STORE_NAME} A8_ENDPOINT_PORT "8080"
 cf set-env ${STORE_NAME} A8_ENDPOINT_TYPE "http"
 cf set-env ${STORE_NAME} A8_PROXY "true"
 cf set-env ${STORE_NAME} A8_REGISTER "true"
